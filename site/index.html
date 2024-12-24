@@ -1,0 +1,16 @@
+<html>
+<script src="https://unpkg.com/htmx.org@2.0.4"></script>
+<script lang="javascript">
+console.log('This is a test');
+document.addEventListener('DOMContentLoaded', function() {
+    // Your code here
+    console.log('Content loaded successfully!');
+    htmx.logAll();
+});
+</script>
+<body>
+<ol id='list' hx-target='this' hx-trigger='click' hx-get='/newlistitem' hx-swap='beforeend' hx-vals='js:{"nlines":document.getElementById("list").getElementsByTagName("li").length}'>
+<li >Item</li>
+</ol>
+</body>
+</html>
