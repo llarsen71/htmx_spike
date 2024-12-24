@@ -1,16 +1,22 @@
 <html>
 <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+
 <script lang="javascript">
-console.log('This is a test');
+function nitems(id) {
+    return document.getElementById(id).getElementsByTagName("li").length;
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     // Your code here
     console.log('Content loaded successfully!');
-    htmx.logAll();
+    //htmx.logAll();
 });
 </script>
 <body>
-<ol id='list' hx-target='this' hx-trigger='click' hx-get='/newlistitem' hx-swap='beforeend' hx-vals='js:{"nlines":document.getElementById("list").getElementsByTagName("li").length}'>
-<li >Item</li>
+<div hx-trigger='click' hx-target='#list' hx-get='/newlistitem' hx-swap='beforeend' hx-vals='js:{"nlines" : nitems("list")}'>
+<h3>Testing</h3>
+<ol id='list'>
+</div>
 </ol>
 </body>
 </html>

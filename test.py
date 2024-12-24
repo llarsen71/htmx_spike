@@ -9,6 +9,23 @@ app = FastAPI(title="api app")
 
 #app.mount("/site", StaticFiles(directory="site", html = True), name="site")
 
+#===============================================================================
+@app.get("/", response_class=HTMLResponse)
+async def home():
+    return dedent("""
+            <html>
+              <body>
+                <h1> This is a test </h1>
+              </body>
+            </html>
+            """)
+    
+#===============================================================================
+@app.get("/data")
+async def data():
+    return [{"name": "Empanada"}, {"name": "Arepa"}]
+
+#===============================================================================
 @app.get("/site/{filename}")
 async def get_site(filename):
   """Serve up static files"""
@@ -23,20 +40,7 @@ async def get_site(filename):
   content_type, _ = guess_type(filename)
   return Response(content, media_type=content_type)
 
-@app.get("/", response_class=HTMLResponse)
-async def home():
-    return dedent("""
-            <html>
-              <body>
-                <h1> This is a test </h1>
-              </body>
-            </html>
-            """)
-    
-@app.get("/data")
-async def data():
-    return [{"name": "Empanada"}, {"name": "Arepa"}]
-
+#===============================================================================
 @app.get("/newlistitem", response_class=HTMLResponse)
 async def newlistitem(nlines: int=0):
-   return f"<li>new item {nlines} </li>"
+   return f"<li>new item {nlines + 1} </li>"
